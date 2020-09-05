@@ -10,9 +10,9 @@ n = list_2[0]
 if m == '0' and n == '0':
     print('0')
 elif m == '0':
-    print(list_2)
+    print(' '.join(list_2))
 elif n == '0':
-    print(list_1)
+    print(' '.join(list_1))
 else:
     a = list_1[1:]
     b = list_2[1:]
