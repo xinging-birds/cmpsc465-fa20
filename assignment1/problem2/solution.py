@@ -1,3 +1,6 @@
+# assignment 1 problem 2
+# by Justin Huang, Divyesh Johri, Eddie Ubri
+
 length = int(input())
 array = input()
 

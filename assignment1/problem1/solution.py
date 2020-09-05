@@ -1,3 +1,6 @@
+# assignment 1 problem 1
+# by Justin Huang, Divyesh Johri, Eddie Ubri
+
 list_1 = input()
 list_2 = input()
 
@@ -26,4 +29,4 @@ else:
             else:
                 c.append(b.pop(0))
 
-    print(' '.join(c))
+    print(' '.join(c) + ' ')
