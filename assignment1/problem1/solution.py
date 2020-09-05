@@ -12,9 +12,7 @@ elif n == '0':
     print(list_1)
 else:
     a = list_1[2:].split()
-    print(a)
     b = list_2[2:].split()
-    print(b)
     c = [str(int(m) + int(n))]
 
     while a or b:
