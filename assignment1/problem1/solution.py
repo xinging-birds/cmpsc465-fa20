@@ -1,8 +1,8 @@
 # assignment 1 problem 1
 # by Justin Huang, Divyesh Johri, Eddie Ubri
 
-list_1 = input()
-list_2 = input()
+list_1 = input().split()
+list_2 = input().split()
 
 m = list_1[0]
 n = list_2[0]
@@ -14,8 +14,8 @@ elif m == '0':
 elif n == '0':
     print(list_1)
 else:
-    a = list_1[2:].split()
-    b = list_2[2:].split()
+    a = list_1[1:]
+    b = list_2[1:]
     c = [str(int(m) + int(n))]
 
     while a or b:
@@ -29,4 +29,4 @@ else:
             else:
                 c.append(b.pop(0))
 
-    print(' '.join(c) + ' ')
+    print(' '.join(c))
