@@ -1,7 +1,12 @@
+"""
+PA3 Problem 1
+Justin Huang (jfh5730)
+Divyesh Johri (dkj5225)
+Eddie Ubri (evu5018)
+"""
+
 from collections import defaultdict
 
-# Problem Number One
-# Macbook > Anything else
 first, second = list(map(int, input().split()))
 graph = defaultdict(list)
 
