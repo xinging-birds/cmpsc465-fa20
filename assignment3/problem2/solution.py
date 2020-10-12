@@ -42,4 +42,6 @@ def decrease_key(pq, v, value):
 
 dist = dijkstra(g, s)
 for d in dist:
+    if d == float('inf'):
+        d = -1
     print(d)
