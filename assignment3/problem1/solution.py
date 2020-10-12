@@ -2,9 +2,7 @@ from collections import defaultdict
 
 # Problem Number One
 # Macbook > Anything else
-
 first, second = list(map(int, input().split()))
-
 graph = defaultdict(list)
 
 def DFS(graph, number, node, stack):
