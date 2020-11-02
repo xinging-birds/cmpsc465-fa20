@@ -6,49 +6,49 @@ Eddie Ubri (evu5018)
 """
 
 from collections import defaultdict
-import array as arr 
 
-# Modified DP algorithm with one extra row
+# Modified Bellman Ford algorithm with one extra row computation
 # Inputs: Graph g = (V, E), n = |V|, s = source vertex
-# Outputs: DP table of subproblems dist
+# Outputs: solution dist and calculation of extra row |V|
 # Runtime: O(|V|*|E|)
-def dp_shortest_path(g, n, s):
+def bellman_ford(g, n, s):
 
-    # Subproblem dist n x n DP table
-    # Set dist[0,s] to 0 and initialize the rest to infinity
-    dist = [ [float('inf') for _ in range(n)] for _ in range(n) ]
-    dist[0][0] = 0
+    solRow = []
 
-    arrMap = {}
-    i = 0
-    for v in g:
-        arrMap[v] = i
-        i = i + 1
+    # Subproblem dist of size |V|
+    # Set dist[s] to 0 and initialize the rest to infinity
+    dist = [ float('inf') for _ in range(n) ]
+    dist[s-1] = 0
 
-    print(arrMap)
-    
-    # Recursively solve the subproblem dist[k][v]
-    for k in range(1, len(g)):   # not n-1, as we need one extra row
-        for v in range(len(g)):
-            dist[k][v] = dist[k-1][v]
+    # Recursively solve the subproblem dist[k]
+    for k in range(1, n+1):   # not n, as we need one extra iteration
+        for v in g:
             for u, l in g[v]:
-                if(dist[k][v] > dist[k-1][arrMap[u]] + l):
-                    dist[k][v] = dist[k-1][arrMap[u]] + l
-    
-    # Return DP table
-    return dist
+                if(dist[v-1] > dist[u-1] + l):
+                    dist[v-1] = dist[u-1] + l
+        # Save the solution row
+        if(k == n-1):
+            solRow = dist.copy()
+
+    # Return the extra row and solution row
+    return (dist, solRow)
+
 
 # Algorithm to find negative cycles
 # Inputs: Graph g = (V, E), n = |V|, s = source vertex
 # Outputs: True -> g has negative cycle
 #          False -> g doesn't have a negative cycle
-# Runtime: O(|V|*|E|) due to DP algorithm
-def detect_negative_cycle(g, n, s):
-    dist = dp_shortest_path(g, n, s)
-    if(dist[len(g),v] for v in range(len(g)) == dist[n-1,v] for v in range(len(g))):
+# Runtime: O(|V|*|E|) due to Bellman Ford algorithm
+def detect_negative_cycle_bf(g, n, s):
+
+    # Retrieve the extra row and solution row
+    dist = bellman_ford(g, n, s)
+
+    if(dist[1] == dist[0]):
         return False
     else:
         return True
+    
 
 
 # Obtain graph information
@@ -56,22 +56,10 @@ n, m, s = list(map(int, input().split())) # n vertices, m edges, s = source vert
 
 # Make the graph
 g = defaultdict(list)
-given_vs = []
-possible_vs = []
 for _ in range(m):
     a, b, c = list(map(int, input().split())) # edge (a, b) with length c
-    given_vs.append(a)
-    possible_vs.append(b)
     g[a].append((b, c)) # stored as (vertex, length)
 
-# Check for sink vertices
-for v in possible_vs:
-    if v not in given_vs:
-        g[v].append((v, 0))
-
-print(g)
-print(len(g))
-
 # Look for negative cycles
-sol = detect_negative_cycle(g, n, s)
+sol = detect_negative_cycle_bf(g, n, s)
 print(sol)
