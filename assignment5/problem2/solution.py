@@ -55,9 +55,9 @@ class Solution:
         return edge[2]
 
 
-    # Will find the number of edges of the minimum spanning tree of the given graph
+    # Will find edge length of the minimum spanning tree of the given graph
     # INPUT: V vertices, E edges
-    # OUTPUT: # of edges in minimum spanning tree
+    # OUTPUT: edge length of minimum spanning tree
     def kruskal(self, V, E):
         
         # Sort edges
